@@ -4,24 +4,13 @@
         <title>WEB1 - CSS</title>    
         <meta charset="utf-8">
         <style>
-
             body {
                 margin: 0;
-            }
-            
-            #active {
-                color: royalblue;
-            }
-
-            .saw {
-                color: red;
-                
             }
             a {
                 color: black;
                 text-decoration: none;
             }
-            
             h1 {
                 font-size: 45px;
                 text-align: center;
@@ -29,48 +18,41 @@
                 margin: 0;    
                 padding: 20px;
             }
-
             ol {
                 border-right: 1px solid grey;
                 width: 100px;
                 margin: 0;
                 padding: 20px;
             }
-            
+            #grid {
+                display: grid;
+                grid-template-columns: 150px 1fr;
+            }
+            #grid ol {
+                padding-left: 32px;
+            }
+            #article {
+                padding-left: 25px;
+            }
         </style>
     </head>
+
     <body>  
         <h1><a href="index.html">WEB</a></h1>
-        <ol>
-            <li><a href="1.html" class ="saw" >HTML</a></li>
-            <li><a href="2.html" class ="saw" id="active">CSS</a></li>
-            <li><a href="3.html">JavaScript</a></li>
-        </ol>
-
-        <!-- 
-        <h1><li><a href="index.html"><font color="red">WEB</font></a></li></h1>
-        <ol>
-            <li><a href="1.html"><font color="red">HTML</font></a></li>
-            <li><a href="2.html"><font color="red">CSS</font></a></li>
-            <li><a href="3.html"><font color="red">JavaScript</font></a></li>
-        </ol> 
-        -->
-
-        <h2>CSS</h2>
-        <p>
-            <a href="https://www.w3.org/TR/html5/" target="_blank" title="HTML5 Speicification"> Hypertext Markup Language (HTML) </a> is the standard markup language for <strong>creating <u>web</u> pages</strong> and web applications.Web browsers receive HTML documents from a web server or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.
-        </p>
-        <p>
-            <img src="img/frog.jpg" alt="" width="560" height="315px">
-        </p>
-
-        <p style="margin-top: 40px;">
-            <br>종속형 시트 또는 캐스케이딩 스타일 시트(영어: Cascading Style Sheet)는 마크업 언어가 실제 표시되는 방법을 기술하는 스타일 언어(영어: Style sheet language 스타일 시트 랭귀지[*])로[1], HTML과 XHTML에 주로 쓰이며, XML에서도 사용할 수 있다. 
-            <br>W3C의 표준이고, 레이아웃과 스타일을 정의할 때의 자유도가 높다. 
-            <br>기본 파일명[2]은 style.css이다. <br>
-        </p>
+        <div id="grid">
+            <div>
+                <ol>
+                    <li><a href="1.html">HTML</a></li>
+                    <li><a href="2.html">CSS</a></li>
+                    <li><a href="3.html">JavaScript</a></li>
+                </ol>
+            </div>
+            <div id="article">
+                <h2>CSS</h2>
+                <p>
+                    <a href="https://www.w3.org/TR/html5/" target="_blank" title="HTML5 Speicification"> Hypertext Markup Language (HTML) </a> is the standard markup language for <strong>creating <u>web</u> pages</strong> and web applications.Web browsers receive HTML documents from a web server or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.
+                </p>                
+            </div>
+        </div>
     </body>
 </html>
-<!-- 사진 출처: https://unsplash.com/ko/%EC%82%AC%EC%A7%84/JLMEZxBcXCU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>의<a href="https://unsplash.com/@sleblanc01?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Stephanie LeBlanc</a>
-   -->
-<!--통계에 기반한 학습 https://www.advancedwebranking.com/seo/html-study/ -->
