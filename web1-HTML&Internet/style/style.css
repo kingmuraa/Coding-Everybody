@@ -1,6 +1,10 @@
 body {
     margin: 0;
 }
+
+p {
+    margin-top: 20px;
+}
 a {
     color: black;
     text-decoration: none;
@@ -14,7 +18,8 @@ h1 {
 }
 ol {
     border-right: 1px solid grey;
-    width: 100px;
+    border-bottom: 1px solid grey;
+    width: 150px;
     margin: 0;
     padding: 20px;
 }
@@ -38,4 +43,13 @@ ol {
     h1 {
         border-bottom: none; 
     }
+}
+
+.youtube {
+    margin: 20px;
+    text-align: center;
+}
+
+#article div{
+    text-align: center;
 }
