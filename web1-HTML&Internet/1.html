@@ -14,44 +14,7 @@
         <meta charset="utf-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <!-- <link rel="stylesheet" href="style/style.css"> -->
-        <script>          
-            var Links = {
-                SetColor: function LinksSetColor(color){
-                    var alist = document.querySelectorAll('a');
-                    var i = 0;
-                    while(i < alist.length){
-                        console.log(alist[i]);
-                        alist[i].style.color = color;
-                        i = i + 1;
-                    }
-                }
-            }
-            var Body = {
-                SetColor: function BodySetColor(color){
-                    document.querySelector('body').style.color = color;
-                },
-
-                SetBackgourndColor: function BodySetBackgourndColor(color){
-                document.querySelector('body').style.backgroundColor = color;
-                }
-            }
-
-            function nightDayHandler(self) {
-            var target = document.querySelector('body');
-            if(this.value === 'Night'){
-                this.value = 'Day'
-                Body.SetBackgourndColor('black');
-                Body.SetColor('white');
-                Links.SetColor('powderblue');
-                
-            } else{
-                this.value = 'Night'
-                Body.SetBackgourndColor('white');
-                Body.SetColor('black');
-                Links.SetColor('blue');
-            }
-        }
-        </script>
+        <script src="js/color.js"></script>
     </head>
     <body class="container">  
         <div class="text-end">
