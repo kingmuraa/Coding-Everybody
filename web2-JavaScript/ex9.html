@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Object</h1>
+    <h2>Create</h2>
+    <script>
+        var hobbies = {
+            "HsKim": "Play Game",
+            "JsKim": "Studying Coding",
+        }
+        document.write("HsKim: "+hobbies.HsKim + "<br>")
+        document.write("JsKim: "+hobbies.JsKim + "<br>")
+        hobbies.DhKim = "Watching Book";
+        document.write("DhKim: "+hobbies.DhKim + "<br>")
+        hobbies['Sang Hun Kim'] = "Tranning";
+        document.write("Sang Hun Kim: "+hobbies['Sang Hun Kim'] + "<br>")
+        </script>
+
+    <h2>Iterate</h2>
+    <script>
+        for(var key in hobbies){   
+            document.write(key+": "+hobbies[key] + "<br>")
+        }
+    </script>
+
+    <h2> Property & Method </h2>
+    <script>
+        hobbies.showAll = function() { 
+            for(var key in this){   
+            document.write(key+": "+ this[key] + "<br>")
+            }   
+        }
+        hobbies.showAll();
+    </script>
+</body>
+</html>
