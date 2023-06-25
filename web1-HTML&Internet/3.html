@@ -14,20 +14,39 @@
                 target.style.backgroundColor = 'black'
                 target.style.color = 'white'
                 this.value = 'Day'
+
+                var alist = document.querySelectorAll('a');
+                var i = 0;
+                while(i < alist.length){
+                    console.log(alist[i]);
+                    alist[i].style.color = 'powderblue';
+                    i = i + 1;
+                }
+
             } else{
                 target.style.backgroundColor= 'white'
                 target.style.color = 'black'
                 this.value = 'Night'
+
+                var alist = document.querySelectorAll('a');
+                var i = 0;
+                while(i < alist.length){
+                    console.log(alist[i]);
+                    alist[i].style.color = '#0A58CA';
+                    i = i + 1;
+                }
             }
             ">
+            <script>
+            </script>
         </div>
-        <h1 class="fs-1 text-center border-bottom border-dark-subtle m-0 p-3"><a href="index.html" class="fw-bold text-decoration-none text-success">WEB</a></h1>
+        <h1 class="fs-1 text-center border-bottom border-dark-subtle m-0 p-3"><a href="index.html" class="fw-bold text-decoration-none">WEB</a></h1>
         <div id="grid" class="row">
             <div id="menu" class="border-end border-dark-subtle col-2">
-                <ol class="ms-3 p-3 text-success fw-bold">
-                    <li><a href="1.html" class="text-decoration-none text-success">HTML</a></li>
-                    <li><a href="2.html" class="text-decoration-none text-success">CSS</a></li>
-                    <li><a href="3.html" class="text-decoration-none text-success">JavaScript</a></li>
+                <ol class="ms-3 p-3 fw-bold">
+                    <li><a href="1.html" class="text-decoration-none ">HTML</a></li>
+                    <li><a href="2.html" class="text-decoration-none ">CSS</a></li>
+                    <li><a href="3.html" class="text-decoration-none ">JavaScript</a></li>
                 </ol>
             </div>
             <div id="article" class="col-10 p-3">
