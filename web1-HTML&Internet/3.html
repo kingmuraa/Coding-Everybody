@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>    
         <title>WEB1 - JavaScript</title>    
@@ -8,16 +8,16 @@
     </head>
     <body class="container">
         <div class="text-end">
-            <input type="button" value="Night" onclick="
-            document.querySelector('body').style.backgroundColor = '#222222'
-            document.querySelector('body').style.color = 'white'
-            document.querySelector('h1 a').style.color = 'white'
-            ">
-            <input type="button" value="Day" onclick="
+            <input id="night_day" type="button" value="Night" onclick="
+            if(document.querySelector('#night_day').value === 'Night'){
+                document.querySelector('body').style.backgroundColor = '#222222'
+                document.querySelector('body').style.color = 'white'
+                document.querySelector('#night_day').value = 'Day'
+            } else{
                 document.querySelector('body').style.backgroundColor= 'white'
                 document.querySelector('body').style.color = 'black'
-                document.querySelector('h1 a').style.color = 'black' 
-                document.querySelectorAll('li a').style.color = 'black'
+                document.querySelector('#night_day').value = 'Night'
+            }
             ">
         </div>
         <h1 class="fs-1 text-center border-bottom border-dark-subtle m-0 p-3"><a href="index.html" class="fw-bold text-decoration-none text-success">WEB</a></h1>
