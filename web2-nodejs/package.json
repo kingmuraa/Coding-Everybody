@@ -7,11 +7,18 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+     
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "gh-pages": "^5.0.0",
     "sanitize-html": "^2.11.0"
   }
+  {
+    "homepage" : "https://kingmuraa.github.io/Coding-Everybody"
+ }
 }
