@@ -1,26 +1,30 @@
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
- 
-var app = http.createServer(function(request,response){
+
+var app = http.createServer(function (request, response) {
     var _url = request.url;
-    var queryData = url.parse(_url, true).query;
-    var pathname = url.parse(_url, true).pathname
+    var queryData = url
+        .parse(_url, true)
+        .query;
+    var pathname = url
+        .parse(_url, true)
+        .pathname
     var title = queryData.id;
-    
-    if(pathname === '/'){
-      if(queryData.id === undefined){        
-        fs.readdir('./data', function(err, filelist){
-          var title = 'Welcome';
-          description = "Hello Node JS"
 
-          var list = '<ul>';
-          for(i=0; i<filelist.length; i++){
-          list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-           }
-          list = list + '</ul>';
+    if (pathname === '/') {
+        if (queryData.id === undefined) {
+            fs.readdir('./data', function (err, filelist) {
+                var title = 'Welcome';
+                description = "Hello Node JS"
 
-          var template = `
+                var list = '<ul>';
+                for (i = 0; i < filelist.length; i++) {
+                    list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+                }
+                list = list + '</ul>';
+
+                var template = `
           <!doctype html>
           <html>
           <head>
@@ -35,23 +39,23 @@ var app = http.createServer(function(request,response){
           </body>
           </html>
           `;
-          response.writeHead(200);
-          response.end(template); 
-        })
-    } else { 
-      fs.readdir('./data', function(err, filelist){
-        var title = 'Welcome';
-        description = "Hello Node JS"
+                response.writeHead(200);
+                response.end(template);
+            })
+        } else {
+            fs.readdir('./data', function (err, filelist) {
+                var title = 'Welcome';
+                description = "Hello Node JS"
 
-        var list = '<ul>';
-        for(i=0; i<filelist.length; i++){
-        list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-         }
-        list = list + '</ul>';
+                var list = '<ul>';
+                for (i = 0; i < filelist.length; i++) {
+                    list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+                }
+                list = list + '</ul>';
 
-      fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
-        var title = queryData.id;
-        var template = `
+                fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
+                    var title = queryData.id;
+                    var template = `
         <!doctype html>
         <html >
         <head>
@@ -66,14 +70,14 @@ var app = http.createServer(function(request,response){
         </body>
         </html>
         `;
-        response.writeHead(200);
-        response.end(template);
-      });
-      });
-    }
+                    response.writeHead(200);
+                    response.end(template);
+                });
+            });
+        }
     } else {
-      response.writeHead(404);
-      response.end('Not Found');
-     }
+        response.writeHead(404);
+        response.end('Not Found');
+    }
 });
 app.listen(3000);
