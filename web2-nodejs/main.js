@@ -31,7 +31,8 @@ var app = http.createServer(function (request, response) {
             });
         } else {
             fs.readdir('./data', function (err, filelist) {
-                fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
+                var filteredId = path.parse(queryData.id).base;
+                fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
                     var title = queryData.id;
                     var list = template.list(filelist)
                     var html = template.HTML(
@@ -84,7 +85,8 @@ var app = http.createServer(function (request, response) {
         });
     } else if (pathname === '/update') {
         fs.readdir('./data', function (err, filelist) {
-            fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
+            filteredId = path.parse(queryData.id).base;
+            fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
                 var title = queryData.id;
                 var list = template.list(filelist)
                 var html = template.HTML(
@@ -130,8 +132,9 @@ var app = http.createServer(function (request, response) {
             var post = qs.parse(body);
             var id = post
                 .id
+            var filteredId = path.parse(id).base;
                 fs
-                .unlink(`data/${id}`, function (err) {
+                .unlink(`data/${filteredId}`, function (err) {
                     response.writeHead(302, {Location: `/`});
                     response.end('');
                 });
