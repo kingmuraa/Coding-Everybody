@@ -29,45 +29,18 @@ app.get('/', function (request, response) {
         `<h2>${title}</h2>${description}
         <img src="/images/godfather.jpg" style="width:400px; display:block; margin-top:20px;">
         `,
-        `<a href="/create">create</a>`
+        `<a href="/topic/create">create</a>`
     )
     response.send(html);
 });
 
-app.get('/page/:pageId', function (request, response, next) {
-    var filteredId = path
-        .parse(request.params.pageId)
-        .base;
-    fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
-        if(err){
-            next(err);             
-        } else {
-            var title = request.params.pageId;
-            var sanitizeTitle = sanitizeHtml(title);
-            var sanitizeDescription = sanitizeHtml(description, {allowedTags: ['h1']});
-            var list = template.list(request.list)
-            var html = template.HTML(
-                sanitizeTitle,
-                list,
-                `<h2>${sanitizeTitle}</h2>${sanitizeDescription}`,
-                `<a href="/create">create</a> <a href="/update/${sanitizeTitle}">update</a>
-                    <form action="/delete_process" method="post">
-                        <input type="hidden" name="id" value="${sanitizeTitle}">
-                        <input type="submit" value="delete">
-                    </form>`
-            );
-            response.send(html);
-        }
-    }); 
-});
-
-app.get('/create', function (request, response) {
+app.get('/topic/create', function (request, response) {
     var title = 'Web-Create';
     var list = template.list(request.list)
     var html = template.HTML(
         title,
         list,
-        `<form action="/create_process" 
+        `<form action="/topic/create_process" 
             method="POST">
             <p><input type="text" name="title" placeholder="title"></p>
             <p><textarea name="description" placeholder="description"></textarea></p>
@@ -79,51 +52,51 @@ app.get('/create', function (request, response) {
     response.send(html);
 });
 
-app.post('/create_process', function (request, response) {
+app.post('/topic/create_process', function (request, response) {
     var post = request.body;
     var title = post.title;
     var description = post.description;
     fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
-        response.redirect('/?id=${title}');
+        response.redirect(`/topic/${title}`);
     });
 });
 
-app.get('/update/:pageId', function (request, response) {
+app.get('/topic/update/:pageId', function (request, response) {
     filteredId = path
         .parse(request.params.pageId)
         .base;
     fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
         var title = request.params.pageId;
-        var list = template.list(filelist)
+        var list = template.list(request.list)
         var html = template.HTML(
             title,
             list,
-            `<form action="/update_process" method="post">
-                <input type="hidden" name="id" value="${title}">
-                <p><input type="text" name="title" placeholder="title" value="${title}"></p>
-                <p><textarea name="description" placeholder="description">${description}</textarea></p>
-                <p><input type="submit"></p>
-                </form>
-                `,
-            `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`
+            `<form action="/topic/update_process" method="post">
+                    <input type="hidden" name="id" value="${title}">
+                    <p><input type="text" name="title" placeholder="title" value="${title}"></p>
+                    <p><textarea name="description" placeholder="description">${description}</textarea></p>
+                    <p><input type="submit"></p>
+                    </form>
+                    `,
+            `<a href="/topic/create">create</a> <a href="/topic/update/${title}">update</a>`
         )
         response.send(html);
     });
 });
 
-app.post('/update_process', function (request, response) {
+app.post('/topic/update_process', function (request, response) {
     var post = request.body;
     var id = post.id
     var title = post.title;
     var description = post.description;
     fs.rename(`data/${id}`, `data/${title}`, function (err) {
         fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
-            response.redirect('/?id=${title}');
+            response.redirect(`/topic/${title}`);
         });
     });
 });
 
-app.post('/delete_process', function (request, response) {
+app.post('/topic/delete_process', function (request, response) {
     var post = request.body;
     var id = post.id
     var filteredId = path
@@ -134,15 +107,46 @@ app.post('/delete_process', function (request, response) {
     });
 });
 
+app.get('/topic/:pageId', function (request, response, next) {
+    var filteredId = path
+        .parse(request.params.pageId)
+        .base;
+    fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
+        if (err) {
+            next(err);
+        } else {
+            var title = request.params.pageId;
+            var sanitizeTitle = sanitizeHtml(title);
+            var sanitizeDescription = sanitizeHtml(description, {allowedTags: ['h1']});
+            var list = template.list(request.list)
+            var html = template.HTML(
+                sanitizeTitle,
+                list,
+                `<h2>${sanitizeTitle}</h2>${sanitizeDescription}`,
+                `<a href="/topic/create">create</a> <a href="/topic/update/${sanitizeTitle}">update</a>
+                    <form action="/topic/delete_process" method="post">
+                        <input type="hidden" name="id" value="${sanitizeTitle}">
+                        <input type="submit" value="delete">
+                    </form>`
+            );
+            response.send(html);
+        }
+    });
+});
+
 app.use(function (req, res, next) {
-    res.status(404).send("Sorry can't find that!");
+res
+    .status(404)
+    .send("Sorry can't find that!");
 });
 
 app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+console.error(err.stack);
+res
+    .status(500)
+    .send('Something broke!');
 });
 
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+console.log('Example app listening on port 3000!')
 });
