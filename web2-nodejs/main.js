@@ -6,14 +6,22 @@ var app = express();
 var fs = require('fs');
 var template = require('./lib/template.js');
 var bodyParser = require('body-parser');
+// var compression = require('compression');
 
 app.use(bodyParser.urlencoded({extended: false}));
+// app.use(compression());
+app.get(function(request, response, next){
+    fs.readdir('*', './data', function (err, filelist) {
+        request.list = filelist;
+        next();
+    });
+});
+
 
 app.get('/', function (request, response) {
-    fs.readdir('./data', function (err, filelist) {
         var title = 'Welcome';
         var description = "Hello Node JS"
-        var list = template.list(filelist)
+        var list = template.list(request.list)
         var html = template.HTML(
             title,
             list,
@@ -21,17 +29,15 @@ app.get('/', function (request, response) {
             `<a href="/create">create</a>`
         )
         response.send(html);
-    });
 });
 
 app.get('/page/:pageId', function (request, response) {
-    fs.readdir('./data', function (err, filelist) {
         var filteredId = path.parse(request.params.pageId).base;
         fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
             var title = request.params.pageId;
             var sanitizeTitle = sanitizeHtml(title);
             var sanitizeDescription = sanitizeHtml(description, {allowedTags: ['h1']});
-            var list = template.list(filelist)
+            var list = template.list(request.list)
             var html = template.HTML(
                 sanitizeTitle,
                 list,
@@ -43,14 +49,12 @@ app.get('/page/:pageId', function (request, response) {
                 </form>`
             );
             response.send(html);
-        });
     });
 });
 
 app.get('/create', function (request, response) {
-    fs.readdir('./data', function (err, filelist) {
         var title = 'Web-Create';
-        var list = template.list(filelist)
+        var list = template.list(request.list)
         var html = template.HTML(
             title,
             list,
@@ -64,7 +68,6 @@ app.get('/create', function (request, response) {
             ``
         );
         response.send(html);
-    });
 });
 
 app.post('/create_process', function (request, response) {
@@ -77,11 +80,10 @@ app.post('/create_process', function (request, response) {
 });
 
 app.get('/update/:pageId', function (request, response) {
-    fs.readdir('./data', function (err, filelist) {
         filteredId = path.parse(request.params.pageId).base;
         fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
             var title = request.params.pageId;
-            var list = template.list(filelist)
+            var list = template.list(request.list)
             var html = template.HTML(
                 title,
                 list,
@@ -95,8 +97,7 @@ app.get('/update/:pageId', function (request, response) {
                 `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`
             )
             response.send(html);
-        });
-    })
+    });
 });
 
 app.post('/update_process', function (request, response) {
