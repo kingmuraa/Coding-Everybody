@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var sanitizeHtml = require('sanitize-html');
-var template = require('../lib/template.js'); 
+var template = require('../lib/template.js');
 var path = require('path');
 var fs = require('fs');
 
