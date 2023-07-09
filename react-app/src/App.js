@@ -91,14 +91,23 @@ function Update(props) {
                         .onUpdate(title, body);
                 }}>
                 <p>
-                    <input type="text" name="title" placeholder='title' value={title} onChange={(event) => {
-                      setTitle(event.target.value);
-                    }}></input>
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder='title'
+                        value={title}
+                        onChange={(event) => {
+                            setTitle(event.target.value);
+                        }}></input>
                 </p>
                 <p>
-                    <textarea name="body" placeholder='body' value={body} onChange={(event) => {
-                      setBody(event.target.value);
-                    }}></textarea>
+                    <textarea
+                        name="body"
+                        placeholder='body'
+                        value={body}
+                        onChange={(event) => {
+                            setBody(event.target.value);
+                        }}></textarea>
                 </p>
                 <p>
                     <input type="submit" value="Update"></input>
@@ -141,14 +150,27 @@ function App() {
             }
         }
         content = <Article title={title} body={body}></Article>;
-        contentControl = <li>
-            <a
-                href={'/update/' + id}
-                onClick={(event) => {
-                    event.preventDefault();
-                    setMode('UPDATE');
-                }}>update</a>
-        </li>
+        contentControl = <><li> <a
+        href = {
+            '/update/' + id
+        }
+        onClick = {
+            (event) => {
+                event.preventDefault();
+                setMode('UPDATE');
+            }
+        } > update</a></li>
+        <li><input type='button' value='Delete' onClick={()=>{
+          const newTopics = []; 
+          for(let  i=0; i<topics.length; i++){
+            if (topics[i].id !== id){
+              newTopics.push(topics[i]);
+            }
+          }
+          setTopics(newTopics);
+          setMode('WELCOME');
+        }}></input > </li>
+        </>
     } else if (mode === 'CREATE') {
         content = <Create
             onCreate={(_title, _body) => {
@@ -173,19 +195,26 @@ function App() {
                 body = topics[i].body;
             }
         }
-        content = <Update title={title} body={body} onUpdate={(title, body) => {
-          console.log(title,body)
-          const newTopics = [...topics];
-          const updatedTopic = {id: id, title:title, body:body};
-          for(let i=0; i<newTopics.length; i++){
-            if(newTopics[i].id === id){
-              newTopics[i] = updatedTopic;
-              break;
-            }
-          }
-          setTopics(newTopics); 
-          setMode('READ');
-        }}></Update>
+        content = <Update
+            title={title}
+            body={body}
+            onUpdate={(title, body) => {
+                console.log(title, body)
+                const newTopics = [...topics];
+                const updatedTopic = {
+                    id: id,
+                    title: title,
+                    body: body
+                };
+                for (let i = 0; i < newTopics.length; i++) {
+                    if (newTopics[i].id === id) {
+                        newTopics[i] = updatedTopic;
+                        break;
+                    }
+                }
+                setTopics(newTopics);
+                setMode('READ');
+            }}></Update>
     }
     return (
         <div>
