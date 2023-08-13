@@ -19,6 +19,11 @@
       "title": "REACT",
       "body": "react is ...",
       "id": 4
+    },
+    {
+      "title": "NEXT",
+      "body": "next is ...",
+      "id": 5
     }
   ],
   "posts": [
