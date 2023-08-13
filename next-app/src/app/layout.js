@@ -19,7 +19,7 @@ export const metadata = {
 
 // Server-side Rendering
 export default async function RootLayout({ children }) {
-    const resp = await fetch('http://localhost:9999/topics', { cache: 'no-cache' });
+    const resp = await fetch(process.env.NEXT_PUBLIC_API_URL+'topics/', { cache: 'no-cache' });
     const topics = await resp.json();
     return (
         <html>
