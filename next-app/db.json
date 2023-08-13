@@ -1,7 +1,25 @@
 {
-  "topics":[
-    {"id": 1, "title": "HTML", "body":"HTML is ..."},
-    {"id": 2, "title": "CSS", "body":"CSS is ..."}
+  "topics": [
+    {
+      "id": 1,
+      "title": "HTML",
+      "body": "HTML is ..."
+    },
+    {
+      "id": 2,
+      "title": "CSS",
+      "body": "CSS is ..."
+    },
+    {
+      "title": "JAVASCRIPT",
+      "body": "javascript is ...",
+      "id": 3
+    },
+    {
+      "title": "REACT",
+      "body": "react is ...",
+      "id": 4
+    }
   ],
   "posts": [
     {
